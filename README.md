@@ -10,7 +10,8 @@ Built by [Ignacio Giri](https://ignaciogiri.vercel.app) at
 
 ## Stack
 
-- **Next.js 16.3.2** (App Router, Turbopack, Cache Components)
+- **Next.js 16.3.2** (App Router, Turbopack, Cache Components, Partial
+  Prefetching, React Compiler)
 - **Tailwind CSS v4**
 - **Base UI** primitives + `lucide-react`
 - **Drizzle ORM** on **Neon** Postgres
@@ -124,6 +125,33 @@ whichever comes first. The queries already carry `cacheTag`s, so wiring
 `revalidateTag` to a Neon webhook later is the obvious next step.
 
 On mobile the stack collapses to a single panel with a breadcrumb.
+
+## Navigation
+
+Navigating never touches the network. The whole catalog is ~56 KB, so it ships
+once with the shell and all three columns render from a single persistent
+client component — panels change props rather than swapping a route slot.
+Measured on a production build: 8ms to switch item, 28ms to open the detail
+panel, zero blocking requests.
+
+The routes still exist underneath, which is what keeps every URL prerendered
+and independently shareable.
+
+A few things keep it that way:
+
+- **[Partial Prefetching](https://nextjs.org/docs/app/guides/adopting-partial-prefetching)**
+  prefetches one shared App Shell per route rather than a payload per link.
+- **Hover-triggered prefetch** on the item rows. A category can hold a
+  hundred-plus links, and prefetching each one as it scrolls into view spends
+  requests on navigations that mostly never happen. The eight category rows
+  stay eager.
+- **`instant = false`** on the two dynamic segments. Neither renders UI of its
+  own, so wrapping them in `<Suspense>` would put a boundary around a component
+  that returns `null`. Every real URL is prerendered, so the blocking path only
+  exists for a slug that is not in the catalog — which is there to 404.
+- **[React Compiler](https://react.dev/learn/react-compiler)** memoizes
+  automatically, so there is no hand-written `useMemo` or `useCallback`.
+- **`inlineCss`** saves a stylesheet round trip on first paint.
 
 ## MCP server
 

@@ -15,9 +15,14 @@ export function Breadcrumb({ names }: { names: Record<string, string> }) {
   const parent = segments.at(-2) ?? segments.at(-1);
 
   return (
+    // Baseline-aligned so the 15px trail sits on the wordmark's baseline
+    // rather than floating above it. h-[22px] pins the row to the wordmark's
+    // own box, so the taller trail cannot grow the flex line and shift
+    // everything a pixel between the states that show a trail and those that
+    // don't.
     <nav
       aria-label="Breadcrumb"
-      className="flex min-w-0 items-baseline gap-2.5"
+      className="flex h-[22px] min-w-0 items-baseline gap-2.5"
     >
       <Link
         className="shrink-0 font-bold text-[22px] leading-none tracking-[-0.02em]"
@@ -27,12 +32,12 @@ export function Breadcrumb({ names }: { names: Record<string, string> }) {
       </Link>
 
       {parent ? (
-        <span className="flex min-w-0 items-baseline gap-2 lg:hidden">
+        <span className="flex min-w-0 items-baseline gap-2 leading-none lg:hidden">
           <span aria-hidden className="text-white/30">
             /
           </span>
           <Link
-            className="truncate text-[15px] text-white/55 transition-colors hover:text-white"
+            className="truncate text-[15px] text-white/55 leading-none transition-colors hover:text-white"
             href={`/${parent}`}
           >
             {names[parent] ?? parent}
