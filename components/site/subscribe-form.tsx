@@ -29,7 +29,7 @@ export function SubscribeForm() {
       >
         <input
           aria-label="Email address"
-          className="min-w-0 flex-1 bg-transparent text-[15px] text-white placeholder:text-white/45 focus:outline-none disabled:opacity-50"
+          className="min-w-0 flex-1 bg-transparent text-base text-white placeholder:text-white/45 focus:outline-none disabled:opacity-50 md:text-[15px]"
           disabled={pending}
           name="email"
           placeholder="Subscribe for updates"
