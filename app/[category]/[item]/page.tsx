@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cacheLife } from "next/cache";
 import { notFound } from "next/navigation";
 import { getAllPaths, getItem } from "@/lib/db/queries";
 
@@ -10,6 +11,7 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[category]/[item]">): Promise<Metadata> {
   "use cache";
+  cacheLife("days");
   const { category, item } = await params;
   const row = await getItem(category, item);
   if (!row) {
@@ -37,6 +39,13 @@ export async function generateMetadata({
     },
   };
 }
+
+/**
+ * Every item is prerendered by generateStaticParams, so this only blocks for a
+ * slug that is not in the catalog — which exists to 404. Wrapping it in
+ * Suspense would put a boundary around a component that renders nothing.
+ */
+export const instant = false;
 
 /**
  * The panels themselves are rendered by the persistent Browser in the root

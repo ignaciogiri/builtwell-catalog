@@ -6,6 +6,13 @@ export async function generateStaticParams() {
   return categories.map((c) => ({ category: c.slug }));
 }
 
+/**
+ * Every category is prerendered by generateStaticParams, so this only blocks
+ * for a slug that is not a category — which exists to 404. The layout renders
+ * no UI of its own, so a Suspense boundary would wrap nothing.
+ */
+export const instant = false;
+
 export default async function CategoryLayout({
   params,
   children,

@@ -1,29 +1,10 @@
 import type { Metadata } from "next";
-import { getCategories } from "@/lib/db/queries";
 
-export async function generateMetadata({
-  params,
-}: PageProps<"/[category]">): Promise<Metadata> {
-  "use cache";
-  const { category } = await params;
-  const row = (await getCategories()).find((c) => c.slug === category);
-  if (!row) {
-    return {};
-  }
-
-  const description = `${row.name} in Catalog — an open-source library of design resources.`;
-
-  return {
-    title: row.name,
-    description,
-    alternates: { canonical: `/${category}` },
-    openGraph: {
-      title: `${row.name} — Catalog`,
-      description,
-      url: `/${category}`,
-    },
-  };
-}
+export const metadata: Metadata = {
+  title: "Browse",
+  description:
+    "Browse a category of the catalog: apps, foundries, studios, publications, mockups and tools.",
+};
 
 /** A category with nothing selected shows two panels and no detail. */
 export default function Page() {
