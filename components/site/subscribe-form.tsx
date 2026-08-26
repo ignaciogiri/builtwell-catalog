@@ -29,7 +29,7 @@ export function SubscribeForm() {
       >
         <input
           aria-label="Email address"
-          className="min-w-0 flex-1 bg-transparent text-base text-white placeholder:text-white/45 focus:outline-none disabled:opacity-50 md:text-[15px]"
+          className="min-w-0 flex-1 bg-transparent text-[16px] text-white leading-[24.375px] placeholder:text-white/45 focus:outline-none disabled:opacity-50 md:text-[15px]"
           disabled={pending}
           name="email"
           placeholder="Subscribe for updates"
@@ -38,7 +38,7 @@ export function SubscribeForm() {
         />
         <button
           aria-label="Subscribe"
-          className="text-white/60 transition-colors hover:text-white disabled:opacity-50 transition-transform duration-100 ease-out active:scale-90 motion-reduce:transition-none motion-reduce:active:scale-100"
+          className="text-white/60 transition-colors transition-transform duration-100 ease-out hover:text-white active:scale-90 disabled:opacity-50 motion-reduce:transition-none motion-reduce:active:scale-100"
           disabled={pending}
           type="submit"
         >
