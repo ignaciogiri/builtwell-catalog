@@ -15,7 +15,10 @@ export function Breadcrumb({ names }: { names: Record<string, string> }) {
   const parent = segments.at(-2) ?? segments.at(-1);
 
   return (
-    <nav aria-label="Breadcrumb" className="flex min-w-0 items-center gap-2.5">
+    <nav
+      aria-label="Breadcrumb"
+      className="flex min-w-0 items-baseline gap-2.5"
+    >
       <Link
         className="shrink-0 font-bold text-[22px] leading-none tracking-[-0.02em]"
         href="/"
@@ -24,7 +27,7 @@ export function Breadcrumb({ names }: { names: Record<string, string> }) {
       </Link>
 
       {parent ? (
-        <span className="flex min-w-0 items-center gap-2 lg:hidden">
+        <span className="flex min-w-0 items-baseline gap-2 lg:hidden">
           <span aria-hidden className="text-white/30">
             /
           </span>
