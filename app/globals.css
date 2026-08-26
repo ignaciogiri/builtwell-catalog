@@ -5,6 +5,12 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  /* Miller column geometry. Mirrored by WIDTHS in lib/layout.ts, which the
+     column animation needs as plain numbers; these are what the first paint
+     uses, before any JS has run. */
+  --w-categories: 320px;
+  --w-items: 320px;
+  --w-detail: 480px;
   --color-ink: #000000;
   --color-panel: rgba(255, 255, 255, 0.04);
   --color-hairline: rgba(255, 255, 255, 0.1);

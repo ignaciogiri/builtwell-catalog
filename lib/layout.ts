@@ -1,4 +1,10 @@
-/** Geometry of the Miller columns, shared by the server render and `usePanelWidths`. */
+/**
+ * Geometry of the Miller columns.
+ *
+ * The layout itself is CSS — see the `--w-*` custom properties in globals.css.
+ * These are the same numbers for the column animation, which needs them as
+ * plain numbers to tween.
+ */
 
 /** Fixed column widths on desktop, measured from the reference design. */
 export const WIDTHS = {
@@ -10,6 +16,4 @@ export const WIDTHS = {
 export const LAYOUT = {
   /** Below this the stack collapses to one panel at a time. */
   columnsBreakpoint: 1024,
-  /** Used for the server render, before the real viewport is known. */
-  assumedViewport: 1440,
 } as const;

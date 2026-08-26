@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { useRef } from "react";
-import { usePanelWidths } from "@/hooks/use-panel-widths";
+import { useIsColumns } from "@/hooks/use-is-columns";
 
 /**
  * The app frame, draggable with a spring rubber-band back into place.
@@ -17,8 +17,8 @@ import { usePanelWidths } from "@/hooks/use-panel-widths";
 export function AppFrame({ children }: { children: React.ReactNode }) {
   const bounds = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
-  const { isColumns } = usePanelWidths();
-  const draggable = isColumns && !reduceMotion;
+  const isColumns = useIsColumns();
+  const draggable = Boolean(isColumns) && !reduceMotion;
 
   return (
     <div
