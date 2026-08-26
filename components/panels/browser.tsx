@@ -87,11 +87,15 @@ export function Browser({
       <AnimatePresence initial={false}>
         {categorySlug && show(1) ? (
           <motion.div
-            animate={{ width: isColumns ? itemsW : "100%", opacity: 1 }}
+            animate={isColumns ? { width: itemsW, opacity: 1 } : false}
             className="min-h-0 shrink-0 overflow-hidden"
-            exit={{ width: 0, opacity: 0 }}
-            initial={{ width: 0, opacity: 0 }}
+            exit={isColumns ? { width: 0, opacity: 0 } : undefined}
+            // Narrow screens swap one full-width panel for another, so there is
+            // no width to animate — only a flash. Desktop opens a new column
+            // beside the others, which is the part worth animating.
+            initial={isColumns ? { width: 0, opacity: 0 } : false}
             key="items"
+            style={isColumns ? undefined : { width: "100%" }}
             transition={{ duration: DURATION, ease: EASE }}
           >
             <div
@@ -123,11 +127,14 @@ export function Browser({
       <AnimatePresence initial={false}>
         {selected && show(2) ? (
           <motion.div
-            animate={{ width: isColumns ? detailW : "100%", opacity: 1 }}
+            animate={isColumns ? { width: detailW, opacity: 1 } : false}
             className="min-h-0 shrink-0 overflow-hidden"
-            exit={{ width: 0, opacity: 0 }}
-            initial={{ width: 0, opacity: 0 }}
+            exit={isColumns ? { width: 0, opacity: 0 } : undefined}
+            // See the items panel: nothing to animate when the panel simply
+            // fills the screen.
+            initial={isColumns ? { width: 0, opacity: 0 } : false}
             key="detail"
+            style={isColumns ? undefined : { width: "100%" }}
             transition={{ duration: DURATION, ease: EASE }}
           >
             {/* Fixed width so contents don't reflow while the outer clips. */}
