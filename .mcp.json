@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "catalog": {
+      "type": "http",
+      "url": "https://catalog.builtwell.design/api/mcp"
+    },
+    "Neon": {
+      "type": "http",
+      "url": "https://mcp.neon.tech/mcp"
+    }
+  }
+}

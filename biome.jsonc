@@ -1,0 +1,48 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "extends": ["ultracite/biome/core", "ultracite/biome/next"],
+  "files": {
+    "includes": ["!public"]
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        // Key order carries meaning here (schema columns, MCP tool shapes).
+        "useSortedKeys": "off"
+      }
+    }
+  },
+  "linter": {
+    "rules": {
+      "performance": {
+        // Event handlers declared in a component body are idiomatic React.
+        "noJsxPropsBind": "off"
+      },
+      "style": {
+        "useConsistentTypeDefinitions": {
+          "level": "error",
+          "options": { "style": "type" }
+        }
+      }
+    }
+  },
+  "overrides": [
+    {
+      // `use cache` requires an async function, even when nothing is awaited.
+      "includes": ["lib/db/queries.ts"],
+      "linter": { "rules": { "suspicious": { "useAwait": "off" } } }
+    },
+    {
+      // One-shot CLI scripts: sequential awaits, console output, and
+      // assertions backed by the query that selected the rows.
+      "includes": ["scripts/**", "mcp/**"],
+      "linter": {
+        "rules": {
+          "performance": { "noAwaitInLoops": "off" },
+          "style": { "noNonNullAssertion": "off" },
+          "suspicious": { "noConsole": "off" }
+        }
+      }
+    }
+  ]
+}
