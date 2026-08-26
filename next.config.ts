@@ -17,8 +17,6 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
-      // Fallback for any item not yet mirrored into Blob.
-      { protocol: "https", hostname: "framerusercontent.com" },
     ],
   },
 };
