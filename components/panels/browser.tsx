@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { usePathname } from "next/navigation";
-import { useMemo } from "react";
 import { Detail } from "@/components/catalog/detail";
 import { NavRow } from "@/components/catalog/nav-row";
 import { usePanelWidths } from "@/hooks/use-panel-widths";
@@ -40,15 +39,13 @@ export function Browser({
     detail: detailW,
   } = usePanelWidths();
 
-  const items = useMemo(
-    () =>
-      categorySlug ? catalog.filter((i) => i.category === categorySlug) : [],
-    [catalog, categorySlug]
-  );
-  const selected = useMemo(
-    () => (itemSlug ? (items.find((i) => i.slug === itemSlug) ?? null) : null),
-    [items, itemSlug]
-  );
+  // No useMemo: the React Compiler memoises these automatically.
+  const items = categorySlug
+    ? catalog.filter((i) => i.category === categorySlug)
+    : [];
+  const selected = itemSlug
+    ? (items.find((i) => i.slug === itemSlug) ?? null)
+    : null;
 
   const depth = pathname.split("/").filter(Boolean).length;
   const show = (panelDepth: number) => isColumns || depth === panelDepth;
@@ -114,6 +111,7 @@ export function Browser({
                     href={`/${i.category}/${i.slug}`}
                     image={i.image}
                     badge={i.badge}
+                    hoverPrefetch
                     key={i.slug}
                     label={i.name}
                   />

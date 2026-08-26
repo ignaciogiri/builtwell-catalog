@@ -20,7 +20,9 @@ export function Detail({
   image: string | null;
 }) {
   return (
-    <div className="px-8 py-8">
+    // 24px matches the header, the sidebar, and where the nav rows land
+    // (nav p-3 + row px-3), so every panel shares one inset.
+    <div className="px-6 py-6">
       {/* Assets carry their own backgrounds and vary in aspect, so the frame
           takes the image's intrinsic ratio rather than forcing a square. */}
       <div

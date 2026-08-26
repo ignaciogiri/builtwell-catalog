@@ -4,6 +4,7 @@ import { getCategories } from "@/lib/db/queries";
 export async function generateMetadata({
   params,
 }: PageProps<"/[category]">): Promise<Metadata> {
+  "use cache";
   const { category } = await params;
   const row = (await getCategories()).find((c) => c.slug === category);
   if (!row) {

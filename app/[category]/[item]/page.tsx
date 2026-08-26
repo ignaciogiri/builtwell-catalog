@@ -9,6 +9,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageProps<"/[category]/[item]">): Promise<Metadata> {
+  "use cache";
   const { category, item } = await params;
   const row = await getItem(category, item);
   if (!row) {

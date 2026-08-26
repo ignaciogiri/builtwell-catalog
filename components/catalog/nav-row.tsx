@@ -5,6 +5,7 @@ import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 type Props<T extends string> = {
@@ -14,6 +15,14 @@ type Props<T extends string> = {
   badge?: string | null;
   /** Categories stay lit while a child item is open; items match exactly. */
   match?: "prefix" | "exact";
+  /**
+   * Hold the prefetch until the pointer or focus arrives.
+   *
+   * The items column can hold a hundred-plus links, and prefetching every one
+   * as it scrolls into view wakes the server once per row for navigations that
+   * mostly never happen.
+   */
+  hoverPrefetch?: boolean;
 };
 
 export function NavRow<T extends string>({
@@ -22,12 +31,18 @@ export function NavRow<T extends string>({
   image,
   badge,
   match = "exact",
+  hoverPrefetch = false,
 }: Props<T>) {
   const pathname = usePathname();
+  const [intent, setIntent] = useState(false);
   const selected =
     match === "prefix"
       ? pathname === href || pathname.startsWith(`${href}/`)
       : pathname === href;
+
+  // null = App Shell only; true = the full route.
+  const prefetch = hoverPrefetch ? (intent ? true : null) : true;
+  const showIntent = () => setIntent(true);
 
   return (
     <Link
@@ -37,6 +52,9 @@ export function NavRow<T extends string>({
         selected ? "bg-white text-black" : "text-white hover:bg-white/[0.07]"
       )}
       href={href}
+      onFocus={hoverPrefetch ? showIntent : undefined}
+      onMouseEnter={hoverPrefetch ? showIntent : undefined}
+      prefetch={prefetch}
     >
       <span className="flex size-6 shrink-0 items-center justify-center overflow-hidden rounded-[6px]">
         {image ? (

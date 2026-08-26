@@ -6,6 +6,14 @@ const nextConfig: NextConfig = {
   distDir: process.env.NEXT_DIST_DIR || ".next",
   cacheComponents: true,
   typedRoutes: true,
+  // Memoises components and hooks automatically, so no hand-written useMemo.
+  reactCompiler: true,
+  // Prefetches one shared App Shell per route rather than a payload per link.
+  partialPrefetching: true,
+  experimental: {
+    // Saves a stylesheet round trip on first paint.
+    inlineCss: true,
+  },
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "*.public.blob.vercel-storage.com" },
