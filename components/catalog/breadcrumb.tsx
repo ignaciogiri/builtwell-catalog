@@ -27,7 +27,7 @@ export function Breadcrumb({ names }: { names: Record<string, string> }) {
       </Link>
 
       {parent ? (
-        <span className="flex min-w-0 items-baseline gap-2 lg:hidden">
+        <span className="flex min-w-0 items-baseline gap-2 leading-none lg:hidden">
           <span aria-hidden className="text-white/30">
             /
           </span>
