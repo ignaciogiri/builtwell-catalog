@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getCategories } from "@/lib/db/queries";
+import { getCategories } from "@/features/catalog/queries";
 
 export async function generateStaticParams() {
   const categories = await getCategories();

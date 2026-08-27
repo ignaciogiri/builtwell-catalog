@@ -1,7 +1,7 @@
 import "server-only";
 import { asc, eq, sql } from "drizzle-orm";
 import { cacheLife, cacheTag } from "next/cache";
-import { db, schema } from "./index";
+import { db, schema } from "@/lib/db";
 
 const { categories, items, itemTags, tags } = schema;
 

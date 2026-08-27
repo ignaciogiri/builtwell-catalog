@@ -2,16 +2,16 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import { Breadcrumb } from "@/components/catalog/breadcrumb";
-import { Browser } from "@/components/panels/browser";
-import { AppFrame } from "@/components/site/app-frame";
-import { BuiltwellMark } from "@/components/site/builtwell-mark";
-import { ContactButton } from "@/components/site/contact-button";
-import { EmDash } from "@/components/site/em-dash";
-import { PhotoCredit } from "@/components/site/photo-credit";
-import { SubscribeForm } from "@/components/site/subscribe-form";
-import { Tip } from "@/components/site/tip";
-import { getAllNames, getCatalog, getCategories } from "@/lib/db/queries";
+import { Breadcrumb } from "@/features/catalog/breadcrumb";
+import { Browser } from "@/features/catalog/browser";
+import { AppFrame } from "@/features/site/app-frame";
+import { BuiltwellMark } from "@/features/site/builtwell-mark";
+import { ContactButton } from "@/features/site/contact-button";
+import { EmDash } from "@/features/site/em-dash";
+import { PhotoCredit } from "@/features/site/photo-credit";
+import { SubscribeForm } from "@/features/subscribe/form";
+import { Tip } from "@/features/site/tip";
+import { getAllNames, getCatalog, getCategories } from "@/features/catalog/queries";
 import {
   AUTHOR_URL,
   BACKDROP,
@@ -21,7 +21,7 @@ import {
   OFFGRID_URL,
   REPO_URL,
   SITE,
-} from "@/lib/site";
+} from "@/features/site/config";
 import "../globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });

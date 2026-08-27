@@ -2,10 +2,10 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { usePathname } from "next/navigation";
-import { Detail } from "@/components/catalog/detail";
-import { NavRow } from "@/components/catalog/nav-row";
-import { usePanelWidths } from "@/hooks/use-panel-widths";
-import type { CatalogItem } from "@/lib/db/queries";
+import { Detail } from "@/features/catalog/detail";
+import { NavRow } from "@/features/catalog/nav-row";
+import { usePanelWidths } from "@/features/catalog/hooks/use-panel-widths";
+import type { CatalogItem } from "@/features/catalog/queries";
 import type { Category } from "@/lib/db/schema";
 import { cn } from "@/lib/utils";
 
@@ -69,10 +69,10 @@ export function Browser({
           <nav className="scroll-thin flex-1 overflow-y-auto p-3">
             {categories.map((c) => (
               <NavRow
+                badge={c.badge}
                 href={`/${c.slug}`}
                 key={c.id}
                 label={c.name}
-                badge={c.badge}
                 match="prefix"
               />
             ))}
@@ -108,10 +108,10 @@ export function Browser({
               <nav className="scroll-thin flex-1 overflow-y-auto p-3">
                 {items.map((i) => (
                   <NavRow
-                    href={`/${i.category}/${i.slug}`}
-                    image={i.image}
                     badge={i.badge}
                     hoverPrefetch
+                    href={`/${i.category}/${i.slug}`}
+                    image={i.image}
                     key={i.slug}
                     label={i.name}
                   />

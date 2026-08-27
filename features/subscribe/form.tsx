@@ -2,7 +2,7 @@
 
 import { ArrowRight, Check } from "lucide-react";
 import { useActionState } from "react";
-import { type SubscribeState, subscribe } from "@/lib/actions";
+import { type SubscribeState, subscribe } from "@/features/subscribe/actions";
 import { cn } from "@/lib/utils";
 
 const initial: SubscribeState = { status: "idle" };
@@ -38,7 +38,7 @@ export function SubscribeForm() {
         />
         <button
           aria-label="Subscribe"
-          className="text-white/60 transition-colors hover:text-white disabled:opacity-50 transition-transform duration-100 ease-out active:scale-90 motion-reduce:transition-none motion-reduce:active:scale-100"
+          className="text-white/60 transition-colors transition-transform duration-100 ease-out hover:text-white active:scale-90 disabled:opacity-50 motion-reduce:transition-none motion-reduce:active:scale-100"
           disabled={pending}
           type="submit"
         >

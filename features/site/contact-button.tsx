@@ -2,7 +2,7 @@
 
 import { Check } from "lucide-react";
 import { useState } from "react";
-import { CONTACT_EMAIL } from "@/lib/site";
+import { CONTACT_EMAIL } from "@/features/site/config";
 
 export function ContactButton() {
   const [copied, setCopied] = useState(false);
@@ -20,7 +20,7 @@ export function ContactButton() {
   return (
     <button
       aria-label={`Copy ${CONTACT_EMAIL}`}
-      className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-5 py-2 text-[15px] transition-colors hover:bg-white/[0.16] transition-transform duration-100 ease-out active:scale-[0.97] motion-reduce:transition-none motion-reduce:active:scale-100"
+      className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-5 py-2 text-[15px] transition-colors transition-transform duration-100 ease-out hover:bg-white/[0.16] active:scale-[0.97] motion-reduce:transition-none motion-reduce:active:scale-100"
       onClick={copy}
       type="button"
     >

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { getAllPaths, getCategories } from "@/lib/db/queries";
-import { SITE } from "@/lib/site";
+import { getAllPaths, getCategories } from "@/features/catalog/queries";
+import { SITE } from "@/features/site/config";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [categories, paths] = await Promise.all([

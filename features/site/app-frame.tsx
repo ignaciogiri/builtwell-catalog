@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { useRef } from "react";
-import { usePanelWidths } from "@/hooks/use-panel-widths";
+import { usePanelWidths } from "@/features/catalog/hooks/use-panel-widths";
 
 /**
  * The app frame, draggable with a spring rubber-band back into place.

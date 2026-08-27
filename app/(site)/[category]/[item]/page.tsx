@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
 import { notFound } from "next/navigation";
-import { getAllPaths, getItem } from "@/lib/db/queries";
+import { getAllPaths, getItem } from "@/features/catalog/queries";
 
 export async function generateStaticParams() {
   return getAllPaths();
