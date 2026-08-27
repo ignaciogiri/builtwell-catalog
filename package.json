@@ -8,7 +8,6 @@
   "scripts": {
     "build": "next build",
     "check": "ultracite check",
-    "db:generate": "drizzle-kit generate",
     "db:mirror": "bun scripts/mirror-assets.ts",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",

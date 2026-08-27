@@ -10,7 +10,6 @@ if (!url) {
 
 export default {
   schema: "./lib/db/schema.ts",
-  out: "./lib/db/migrations",
   dialect: "postgresql",
   dbCredentials: { url },
 } satisfies Config;
